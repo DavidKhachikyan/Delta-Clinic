@@ -58,8 +58,7 @@ const SignUp = () => {
           <TextField inputRef={inputEmail} placeholder="Email" />
           <TextField inputRef={inputPassword} placeholder="Password" />
           {/* <TextField placeholder="Confirm Password" /> */}
-          {console.log(error, "er")}
-          {error}
+
           <Button onClick={registerHandler}>Sign Up</Button>
         </Box>
       </Grid>
