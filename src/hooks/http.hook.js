@@ -6,7 +6,6 @@ export const useHttp = () => {
 
   const request = useCallback(
     async (url, method = "GET", body = null, headers = {}) => {
-      console.log("err");
       setLoading(true);
       headers["Authorization"] = `Bearer ${localStorage.getItem(
         "accessToken"
@@ -18,7 +17,10 @@ export const useHttp = () => {
         }
         console.log("resp");
         const response = await fetch(url, { method, body, headers });
+        console.log("resp2");
+
         const data = await response.json();
+        console.log("resp3");
 
         if (!response.ok) {
           throw new Error(data.message || "Ne Tak");

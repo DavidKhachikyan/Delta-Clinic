@@ -1,18 +1,19 @@
 import "./App.css";
-import { AppBar, Box, Toolbar, Typography } from "@mui/material";
-import { BrowserRouter as Router } from "react-router-dom";
+import { Box, Toolbar } from "@mui/material";
+import { BrowserRouter as Router, useLocation } from "react-router-dom";
 import { useRoutes } from "./routes";
+import Header from "./pages/header/header";
+import { useEffect } from "react";
 
 const App = () => {
-  const routes = useRoutes(false);
+  const location = useLocation();
+
+  const routes = useRoutes(localStorage.getItem("accessToken"));
+
   return (
     <Box>
-      <AppBar position="static">
-        <Toolbar variant="dense" sx={{ background: "#fff" }}>
-          <Typography color="#3686F7">Home</Typography>
-        </Toolbar>
-      </AppBar>
-      <Router>{routes}</Router>
+      <Header />
+      {routes}
     </Box>
   );
 };
