@@ -1,12 +1,9 @@
 import { makeStyles } from "@mui/styles";
-import img from "../../assets/img/bgBlue.svg";
 
 export const useStyles = makeStyles(() => {
   return {
-    wrapper: {
-      height: "100vh",
-      backgroundImage: `url(${img})`,
-      backgroundRepeat: "no-repeat",
+    input: {
+      marginBottom: "20px",
     },
   };
 });

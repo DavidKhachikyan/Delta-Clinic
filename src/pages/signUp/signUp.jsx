@@ -1,19 +1,21 @@
-import { Grid, Box, Typography, TextField, Button } from "@mui/material";
+import { Grid, Box, Typography, Button, TextField } from "@mui/material";
 import { useStyles } from "./signUp-styles";
-import Img from "../../assets/img/Tooth.svg";
+import Img from "../../assets/img/signUpImage.png";
 import { useHttp } from "../../hooks/http.hook";
 import { useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useMessage } from "../../hooks/message.hook";
 
 const SignUp = () => {
   const message = useMessage();
 
-  const { loading, request, error, clearError } = useHttp();
+  const { request, error, clearError } = useHttp();
 
   const inputName = useRef(null);
   const inputEmail = useRef(null);
   const inputPassword = useRef(null);
+  const inputLastName = useRef(null);
+  const inputCompanyName = useRef(null);
 
   const navigate = useNavigate();
 
@@ -33,6 +35,7 @@ const SignUp = () => {
           name: inputName.current.value,
           email: inputEmail.current.value,
           password: inputPassword.current.value,
+          lastName: inputLastName.current.value,
         }
       );
       navigate("/sign-in");
@@ -42,24 +45,102 @@ const SignUp = () => {
 
   const styles = useStyles();
   return (
-    <Grid container className={styles.wrapper}>
+    <Grid container>
       <Grid
         item
-        sx={{ width: "500px", marginTop: "50px", marginLeft: "100px" }}
+        sx={{
+          width: "50%",
+          display: "flex",
+          justifyContent: "center",
+        }}
       >
-        <img style={{ width: "100%" }} src={Img} alt="background" />
+        <img
+          style={{ width: "500px", maxHeight: "500px", borderRadius: "50%" }}
+          src={Img}
+          alt="background"
+        />
       </Grid>
-      <Grid item>
+      <Grid item width={"50%"} display="flex" flexDirection="column">
         <Box>
-          <Typography color>SIGN UP</Typography>
+          <Typography
+            color="#1A70F1"
+            fontWeight={500}
+            fontSize="36px"
+            mb="30px"
+            mt="50px"
+            ml="50px"
+          >
+            Գրանցվել
+          </Typography>
         </Box>
-        <Box display="flex" flexDirection="column">
-          <TextField inputRef={inputName} placeholder="Name" />
-          <TextField inputRef={inputEmail} placeholder="Email" />
-          <TextField inputRef={inputPassword} placeholder="Password" />
-          {/* <TextField placeholder="Confirm Password" /> */}
-
-          <Button onClick={registerHandler}>Sign Up</Button>
+        <Box
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          width="300px"
+          ml="50px"
+        >
+          <TextField
+            className={styles.input}
+            label="Անուն"
+            inputRef={inputName}
+            fullWidth
+          />
+          <TextField
+            label="Ազգանուն"
+            inputRef={inputLastName}
+            className={styles.input}
+            fullWidth
+          />
+          <TextField
+            label="Կազմակերպության անվանում"
+            inputRef={inputCompanyName}
+            className={styles.input}
+            fullWidth
+          />
+          <TextField
+            className={styles.input}
+            inputRef={inputEmail}
+            label="Էլ․ հասցե"
+            fullWidth
+            type="email"
+          />
+          <TextField
+            className={styles.input}
+            inputRef={inputPassword}
+            label="Գաղտնաբառ"
+            fullWidth
+            type="password"
+          />
+          <Typography color="red" mb="20px">
+            {error}
+          </Typography>
+          <Button
+            sx={{
+              backgroundColor: " #1B477F",
+              color: "#FFFFFF",
+              width: "200px",
+              "&:hover": {
+                backgroundColor: " #1B477F",
+              },
+            }}
+            onClick={registerHandler}
+          >
+            Ստեղծել հաշիվ
+          </Button>
+          <Typography mt="20px">
+            Արդեն ունե՞ք հաշիվ{" "}
+            <Link
+              style={{
+                textDecoration: "none",
+                color: "#1A70F1",
+                fontWeight: 700,
+              }}
+              to="/sign-in"
+            >
+              Մուտք
+            </Link>
+          </Typography>
         </Box>
       </Grid>
     </Grid>

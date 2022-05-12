@@ -1,13 +1,15 @@
 import { Grid, Box, Typography, TextField, Button } from "@mui/material";
-import Img from "../../assets/img/Tooth.svg";
+import Img from "../../assets/img/signInImage.png";
 import { useStyles } from "./signIn-styles";
 import { useHttp } from "../../hooks/http.hook";
-import { useRef, useEffect, useState } from "react";
+import { useState } from "react";
 import { useMessage } from "../../hooks/message.hook";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignIn = () => {
   const styles = useStyles();
-  const { loading, request, error, clearError } = useHttp();
+  const navigate = useNavigate();
+  const { request, error } = useHttp();
 
   const [form, setForm] = useState({ login: "", password: "" });
 
@@ -18,40 +20,104 @@ const SignIn = () => {
   };
 
   const loginHandler = async () => {
-    const data = await request("http://localhost:5000/api/auth/login", "POST", {
-      email: form.login,
-      password: form.password,
-    });
-    message(data.message);
+    try {
+      const data = await request(
+        "http://localhost:5000/api/auth/login",
+        "POST",
+        {
+          email: form.login,
+          password: form.password,
+        }
+      );
+      localStorage.setItem("accessToken", data.token);
+      navigate("/my-page");
+      message(data.message);
+    } catch (e) {}
   };
 
   return (
-    <Grid container className={styles.wrapper}>
+    <Grid container>
       <Grid
         item
-        sx={{ width: "500px", marginTop: "50px", marginLeft: "100px" }}
+        width={"50%"}
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
       >
-        <img style={{ width: "100%" }} src={Img} alt="background" />
-      </Grid>
-      <Grid item>
         <Box>
-          <Typography color>SIGN IN</Typography>
+          <Typography
+            color="#1A70F1"
+            fontWeight={500}
+            fontSize="36px"
+            mb="30px"
+            mt="50px"
+            ml="50px"
+          >
+            Մուտք
+          </Typography>
         </Box>
-        <Box display="flex" flexDirection="column">
+        <Box
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          width="300px"
+          ml="50px"
+        >
           <TextField
             onChange={changeHandler}
             value={form.login}
             name={"login"}
-            placeholder="Email"
+            label="Էլ․ հասցե"
+            fullWidth
+            className={styles.input}
+            type="email"
           />
           <TextField
             onChange={changeHandler}
             value={form.password}
             name={"password"}
-            placeholder="Password"
+            label="Գաղտնաբառ"
+            fullWidth
+            className={styles.input}
+            type="password"
           />
-          <Button onClick={loginHandler}>Sign In</Button>
+          <Typography color="red" mb="20px">
+            {error}
+          </Typography>
+          <Button
+            sx={{
+              backgroundColor: " #1B477F",
+              color: "#FFFFFF",
+              width: "200px",
+              "&:hover": {
+                backgroundColor: " #1B477F",
+              },
+            }}
+            onClick={loginHandler}
+          >
+            Մուտք հաշիվ
+          </Button>
+          <Typography mt="20px">
+            Չունե՞ք հաշիվ{" "}
+            <Link
+              style={{
+                textDecoration: "none",
+                color: "#1A70F1",
+                fontWeight: 700,
+              }}
+              to="/sign-up"
+            >
+              Գրանցվել
+            </Link>
+          </Typography>
         </Box>
+      </Grid>
+      <Grid item>
+        <img
+          style={{ width: "500px", borderRadius: "50%" }}
+          src={Img}
+          alt="background"
+        />
       </Grid>
     </Grid>
   );
