@@ -2,14 +2,14 @@ import { Grid, Box, Typography, TextField, Button } from "@mui/material";
 import Img from "../../assets/img/signInImage.png";
 import { useStyles } from "./signIn-styles";
 import { useHttp } from "../../hooks/http.hook";
-import { useRef, useEffect, useState } from "react";
+import { useState } from "react";
 import { useMessage } from "../../hooks/message.hook";
 import { Link, useNavigate } from "react-router-dom";
 
 const SignIn = () => {
   const styles = useStyles();
   const navigate = useNavigate();
-  const { loading, request, error, clearError } = useHttp();
+  const { request, error } = useHttp();
 
   const [form, setForm] = useState({ login: "", password: "" });
 

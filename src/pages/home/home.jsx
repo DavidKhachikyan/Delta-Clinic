@@ -1,11 +1,6 @@
-import { Grid, Toolbar, Typography, AppBar, Button, Box } from "@mui/material";
-import Img from "../../assets/img/Tooth.svg";
-import { useHttp } from "../../hooks/http.hook";
-import { useRef, useEffect, useState } from "react";
-import { useMessage } from "../../hooks/message.hook";
+import { Typography, Box } from "@mui/material";
 import Bg from "../../assets/img/homeBg.png";
 import Image from "../../assets/img/homeImg.png";
-import { Link } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 const useStyles = makeStyles(() => {
   return {

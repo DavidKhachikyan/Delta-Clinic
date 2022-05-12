@@ -1,19 +1,6 @@
-import {
-  Grid,
-  Toolbar,
-  Typography,
-  AppBar,
-  Button,
-  Box,
-  TextField,
-  TextareaAutosize,
-  FormLabel,
-} from "@mui/material";
-// import Img from "../../assets/img/Tooth.svg";
+import { Typography, Button, Box, TextField, FormLabel } from "@mui/material";
 import { useRef, useEffect, useState } from "react";
 import { useMessage } from "../../../../hooks/message.hook";
-// import Logo from "../../assets/img/logo.png";
-import { Link, useNavigate } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 import { useHttp } from "../../../../hooks/http.hook";
 
@@ -29,17 +16,15 @@ const useStyles = makeStyles(() => {
 });
 
 const NewClients = ({ setSelectedTab }) => {
-  const { loading, request, error, clearError } = useHttp();
+  const { request, error, clearError } = useHttp();
   const [ok, setOk] = useState("");
 
   const message = useMessage();
-  const navigate = useNavigate();
 
   const styles = useStyles();
   const name = useRef(null);
   const phone = useRef(null);
   const email = useRef(null);
-  const information = useRef(null);
   const date = useRef(null);
 
   useEffect(() => {
@@ -58,7 +43,7 @@ const NewClients = ({ setSelectedTab }) => {
           name: name.current.value,
           email: email.current.value,
           phone: phone.current.value,
-          information: information.current.value,
+          // information: information.current.value,
           date: date.current.value,
         }
       );
@@ -110,16 +95,6 @@ const NewClients = ({ setSelectedTab }) => {
         fullWidth
         inp
       /> */}
-      <Box width="100%">
-        <FormLabel>Տեղեկություն կատարված աշխատանքի մասին և այլն․․․</FormLabel>
-        <TextareaAutosize
-          className={styles.input}
-          aria-label="minimum height"
-          minRows={5}
-          style={{ width: 400 }}
-          ref={information}
-        />
-      </Box>
       {error && (
         <Typography color="red" mb="20px">
           {error}

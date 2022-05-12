@@ -15,12 +15,9 @@ export const useHttp = () => {
           body = JSON.stringify(body);
           headers["Content-Type"] = "application/json";
         }
-        console.log("resp");
         const response = await fetch(url, { method, body, headers });
-        console.log("resp2");
 
         const data = await response.json();
-        console.log("resp3");
 
         if (!response.ok) {
           throw new Error(data.message || "Ne Tak");

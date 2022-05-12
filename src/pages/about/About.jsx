@@ -1,46 +1,7 @@
-import { Grid, Box, Typography, Button, TextField } from "@mui/material";
+import { Grid, Box, Typography } from "@mui/material";
 import Img from "../../assets/img/about.png";
-import { useHttp } from "../../hooks/http.hook";
-import { useRef, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useMessage } from "../../hooks/message.hook";
 
 const About = () => {
-  const message = useMessage();
-
-  const { loading, request, error, clearError } = useHttp();
-
-  const inputName = useRef(null);
-  const inputEmail = useRef(null);
-  const inputPassword = useRef(null);
-  const inputLastName = useRef(null);
-
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    message(error);
-    if (error === null) {
-      clearError();
-    }
-  }, [error, message, clearError]);
-
-  const registerHandler = async () => {
-    try {
-      const data = await request(
-        "http://localhost:5000/api/auth/register",
-        "POST",
-        {
-          name: inputName.current.value,
-          email: inputEmail.current.value,
-          password: inputPassword.current.value,
-          lastName: inputLastName.current.value,
-        }
-      );
-      navigate("/sign-in");
-      message(data.message);
-    } catch (e) {}
-  };
-
   return (
     <Grid container>
       <Grid

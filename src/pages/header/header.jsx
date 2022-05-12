@@ -1,8 +1,4 @@
-import { Grid, Toolbar, Typography, AppBar, Button, Box } from "@mui/material";
-import Img from "../../assets/img/Tooth.svg";
-import { useHttp } from "../../hooks/http.hook";
-import { useRef, useEffect, useState } from "react";
-import { useMessage } from "../../hooks/message.hook";
+import { Toolbar, Typography, AppBar, Box } from "@mui/material";
 import Logo from "../../assets/img/logo.png";
 import { Link } from "react-router-dom";
 import Menu from "./components/Menu";

@@ -9,12 +9,13 @@ import { useMessage } from "../../hooks/message.hook";
 const SignUp = () => {
   const message = useMessage();
 
-  const { loading, request, error, clearError } = useHttp();
+  const { request, error, clearError } = useHttp();
 
   const inputName = useRef(null);
   const inputEmail = useRef(null);
   const inputPassword = useRef(null);
   const inputLastName = useRef(null);
+  const inputCompanyName = useRef(null);
 
   const navigate = useNavigate();
 
@@ -49,13 +50,12 @@ const SignUp = () => {
         item
         sx={{
           width: "50%",
-          marginTop: "50px",
           display: "flex",
           justifyContent: "center",
         }}
       >
         <img
-          style={{ width: "500px", borderRadius: "50%" }}
+          style={{ width: "500px", maxHeight: "500px", borderRadius: "50%" }}
           src={Img}
           alt="background"
         />
@@ -89,6 +89,12 @@ const SignUp = () => {
           <TextField
             label="Ազգանուն"
             inputRef={inputLastName}
+            className={styles.input}
+            fullWidth
+          />
+          <TextField
+            label="Կազմակերպության անվանում"
+            inputRef={inputCompanyName}
             className={styles.input}
             fullWidth
           />
